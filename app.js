@@ -18,7 +18,7 @@ client.once('ready', () => {
 
 client.on('messageCreate', (message) => {
     if (message.author.bot) return;
-
+    console.log(message.channel.id)
     if (message.channel.type == 'DM') {
         dmHandler.handle(message)
         return
