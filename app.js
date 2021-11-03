@@ -20,6 +20,7 @@ client.on('messageCreate', (message) => {
     if (message.author.bot) return;
 
     if (message.channel.type == 'DM') {
+        logger.info(`Handling direct message from user ${message.author.id}...`)
         dmHandler.handle(message)
         return
     }
