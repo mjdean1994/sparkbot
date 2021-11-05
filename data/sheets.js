@@ -84,9 +84,10 @@ const getNewToken = (oauth2Client, next = () => { }) => {
 const buildValueArray = (obj) => {
     let value = [["Name", "Level", "Gearscore", "Weapon 1", "Weapon 2", "Weight"]]
 
-    for (const [k, v] of Object.entries(obj)) {
+    for (const [k, v] of Object.entries(obj).sort((a, b) => {
+        return b.name - a.name;
+    })) {
         value.push([v.name, v.level, v.gearscore, v.primaryWeapon, v.secondaryWeapon, v.weight])
     }
-
     return value
 }
