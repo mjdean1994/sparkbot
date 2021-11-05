@@ -88,7 +88,7 @@ const buildValueArray = (obj) => {
         return a[1].name.localeCompare(b[1].name);
     })
     for (const [k, v] of entries) {
-        value.push([v.name, v.level, v.gearscore, v.primaryWeapon, v.secondaryWeapon, v.weight])
+        value.push([v.name, v.level || " ", v.gearscore || " ", v.primaryWeapon || " ", v.secondaryWeapon || " ", v.weight || " "])
     }
     return value
 }
