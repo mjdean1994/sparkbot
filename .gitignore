@@ -1,4 +1,5 @@
 config.json
 tokenCache.json
 node_modules/
-data/*.json
+data/characterData.json
+data/flowData.json
