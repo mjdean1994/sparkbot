@@ -1,3 +1,4 @@
 config.json
 tokenCache.json
 node_modules/
+data/*.json
