@@ -22,5 +22,5 @@ module.exports = (message) => {
     characterData.setAttribute(message.author.id, 'gearscore', gearscoreInput)
 
     message.author.send({ embeds: [new MessageEmbed().setTitle(`Your gearscore is ${gearscoreInput}, got it. What's the first weapon you use?`)] })
-    flowData.setFlowState(message.author.id, 'primaryWeaponPrompt')
+    flowData.setFlowState(message.author.id, 'weapon1New')
 }

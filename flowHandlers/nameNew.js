@@ -20,6 +20,6 @@ module.exports = (message) => {
 
     characterData.setAttribute(message.author.id, 'name', nameInput)
 
-    message.author.send({ embeds: [new MessageEmbed().setTitle(`Nice to meet you, ${nameInput}. What is your character\'s current level?`)] })
-    flowData.setFlowState(message.author.id, 'levelPrompt')
+    message.author.send({ embeds: [new MessageEmbed().setTitle(`Nice to meet you, ${nameInput}. What company are you in? You can also say "none" if you aren't in one.`)] })
+    flowData.setFlowState(message.author.id, 'companyNew')
 }

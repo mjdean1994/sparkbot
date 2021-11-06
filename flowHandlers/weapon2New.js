@@ -16,11 +16,11 @@ module.exports = (message) => {
     if (primaryWeapon.includes('spear')) {
         primaryActual = 'Spear'
     }
-    if (primaryWeapon.includes('hatchet')) {
-        primaryActual = 'Hatchet'
-    }
     if (primaryWeapon.includes('rapier')) {
         primaryActual = 'Rapier'
+    }
+    if (primaryWeapon.includes('hatchet')) {
+        primaryActual = 'Hatchet'
     }
     if (primaryWeapon.includes('great') && primaryWeapon.includes('ax')) {
         primaryActual = 'Great Axe'
@@ -42,13 +42,13 @@ module.exports = (message) => {
     }
 
     if (!primaryActual) {
-        logger.warn(`Rejected input "primaryWeapon" attribute value "${primaryWeapon}" for user ${message.author.id}.`)
+        logger.warn(`Rejected input "secondaryWeapon" attribute value "${primaryWeapon}" for user ${message.author.id}.`)
         message.author.send({ embeds: [new MessageEmbed().setTitle('You didn\'t specify a weapon that I know. Check the in-game names of the weapons if you aren\'t sure what to call it. Try again when you\'re ready.')] })
         return
     }
 
-    characterData.setAttribute(message.author.id, 'primaryWeapon', primaryActual)
+    characterData.setAttribute(message.author.id, 'secondaryWeapon', primaryActual)
 
-    message.author.send({ embeds: [new MessageEmbed().setTitle(`I'm hearing that your primary weapon is the ${primaryActual}. What's the other weapon you use?`)] })
-    flowData.setFlowState(message.author.id, 'secondaryWeaponPrompt')
+    message.author.send({ embeds: [new MessageEmbed().setTitle(`And your secondary weapon is ${primaryActual}, great! What's your weight class? Your options are "light", "medium", or "heavy".`)] })
+    flowData.setFlowState(message.author.id, 'weightNew')
 }

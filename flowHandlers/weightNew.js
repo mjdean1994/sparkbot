@@ -17,9 +17,8 @@ module.exports = (message) => {
 
     characterData.getEmbed(message.author.id, (err, embed) => {
         message.author.send({
-            embeds: [new MessageEmbed().setTitle(`I'll mark down that you're in ${weightInput} armor. That's all I need. Here's the main menu.`)],
-            components: menuFactory.getMainMenu()
+            embeds: [new MessageEmbed().setTitle(`I'll mark down that you're in ${weightInput} armor. Anything else you want people to know about you? You can just say "none", too.`)]
         })
     })
-    flowData.setFlowState(message.author.id, "idle")
+    flowData.setFlowState(message.author.id, "noteNew")
 }

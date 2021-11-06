@@ -22,5 +22,5 @@ module.exports = (message) => {
     characterData.setAttribute(message.author.id, 'level', levelInput)
 
     message.author.send({ embeds: [new MessageEmbed().setTitle(`Okay, so you're level ${levelInput}. What is your character\'s current gearscore?`)] })
-    flowData.setFlowState(message.author.id, 'gearscorePrompt')
+    flowData.setFlowState(message.author.id, 'gearscoreNew')
 }

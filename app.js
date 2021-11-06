@@ -8,10 +8,6 @@ const logger = require('./lib/logger')
 const client = require("./client");
 const buttonHandler = require('./buttonHandlers/buttonHandler');
 
-const commands = [
-    { keyword: 'character', execute: require('./commands/character') }
-]
-
 client.once('ready', () => {
     client.user.setActivity("New World", { type: "PLAYING" })
     logger.info('SparkBot has started.')
@@ -25,24 +21,13 @@ client.on('messageCreate', (message) => {
         dmHandler.handle(message)
         return
     }
-
-    // Short circuit if we don't match a command
-    if (!message.content.startsWith(command_prefix)) return;
-
-    let command_keyword = message.content.split(' ')[0].substr(command_prefix.length)
-    let command = commands.find(x => x.keyword == command_keyword)
-
-    // If we don't know what the base command is, ignore it
-    if (command == null) return;
-
-    command.execute(message)
 });
 
 client.on("interactionCreate", (interaction) => {
     if (interaction.isButton()) {
+        logger.info(`Handling button interaction from user ${interaction.user.id}...`)
         buttonHandler(interaction)
     }
-
 })
 
 client.login(token);

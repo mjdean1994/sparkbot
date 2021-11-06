@@ -33,7 +33,7 @@ const sendUpdate = () => {
         let sheets = google.sheets({ version: "v4", auth: auth })
         sheets.spreadsheets.values.update({
             spreadsheetId: spreadsheetId,
-            range: 'Roster!A:F',
+            range: 'Roster!A:I',
             valueInputOption: 'USER_ENTERED',
             resource: {
                 values: buildValueArray(queuedObj)
@@ -82,13 +82,13 @@ const getNewToken = (oauth2Client, next = () => { }) => {
 }
 
 const buildValueArray = (obj) => {
-    let value = [["Name", "Level", "Gearscore", "Weapon 1", "Weapon 2", "Weight"]]
+    let value = [["Discord ID", "Name", "Company", "Level", "Gearscore", "Weapon 1", "Weapon 2", "Weight", "Notes"]]
 
     let entries = Object.entries(obj).sort((a, b) => {
         return a[1].name.localeCompare(b[1].name);
     })
     for (const [k, v] of entries) {
-        value.push([v.name, v.level || " ", v.gearscore || " ", v.primaryWeapon || " ", v.secondaryWeapon || " ", v.weight || " "])
+        value.push([k, v.name, v.company || " ", v.level || " ", v.gearscore || " ", v.primaryWeapon || " ", v.secondaryWeapon || " ", v.weight || " ", v.notes || " "])
     }
     return value
 }

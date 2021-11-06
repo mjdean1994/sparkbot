@@ -8,6 +8,6 @@ module.exports = (message) => {
             embeds: [new MessageEmbed()
                 .setTitle(`Hey! I don't think we've spoken before. What's your character's in-game name?`)]
         })
-        flowData.setFlowState(message.author.id, "namePrompt")
+        flowData.setFlowState(message.author.id, "nameNew")
     })
 }

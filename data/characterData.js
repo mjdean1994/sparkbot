@@ -51,20 +51,14 @@ module.exports.getEmbed = (discordId, next) => {
             let character = obj[discordId]
             let embed = new MessageEmbed()
                 .setTitle(character.name).setColor("#DAA520")
-            if (character.level) {
-                embed.addField("Level", "" + character.level, true)
-            }
-            if (character.gearscore) {
-                embed.addField("Gearscore", "" + character.gearscore, true)
-            }
-            if (character.primaryWeapon) {
-                embed.addField("Weapon 1", character.primaryWeapon, false)
-            }
-            if (character.secondaryWeapon) {
-                embed.addField("Weapon 2", character.secondaryWeapon, false)
-            }
-            if (character.weight) {
-                embed.addField("Weight", character.weight, false)
+            embed.addField("Company", character.company || "None", false)
+            embed.addField("Level", "" + character.level || "Unset", true)
+            embed.addField("Gearscore", "" + character.gearscore || "Unset", true)
+            embed.addField("Weapon 1", character.primaryWeapon || "Unset", false)
+            embed.addField("Weapon 2", character.secondaryWeapon, false)
+            embed.addField("Weight", character.weight || "Unset", false)
+            if (character.notes) {
+                embed.addField("Notes", character.notes, false)
             }
 
             next(null, embed)
