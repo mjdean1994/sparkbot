@@ -21,7 +21,7 @@ module.exports = (message) => {
 
     let isNone = false
     if (nameInput.toLowerCase() === "none") {
-        nameInput = "-"
+        nameInput = ""
         isNone = true
     }
 
