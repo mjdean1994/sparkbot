@@ -12,7 +12,7 @@ module.exports = (message) => {
         return;
     }
 
-    if (!nameInput.match(/^[a-zA-Z][a-zA-Z0-9 .,]*$/g)) {
+    if (!nameInput.match(/^[a-zA-Z0-9 .,]*$/g)) {
         logger.warn(`Rejected input "name" attribute value "${nameInput}" for user ${message.author.id}.`)
         message.author.send({ embeds: [new MessageEmbed().setTitle(`That name doesn't look like a valid New World name to me. Again, it should be your character's in-game name.`)] })
         return;

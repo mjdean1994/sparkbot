@@ -13,7 +13,7 @@ module.exports = (message) => {
         return;
     }
 
-    if (!nameInput.match(/^[a-zA-Z][a-zA-Z0-9 .,]*$/g)) {
+    if (!nameInput.match(/^[a-zA-Z0-9 .,]*$/g)) {
         logger.warn(`Rejected input "company" attribute value "${nameInput}" for user ${message.author.id}.`)
         message.author.send({ embeds: [new MessageEmbed().setTitle(`Hmm, something didn't look quite right with that entry. Again, you should be giving me your company's in-game name.`)] })
         return;
