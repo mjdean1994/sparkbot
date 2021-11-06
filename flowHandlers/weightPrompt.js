@@ -22,5 +22,4 @@ module.exports = (message) => {
         })
     })
     flowData.setFlowState(message.author.id, "idle")
-})
 }
