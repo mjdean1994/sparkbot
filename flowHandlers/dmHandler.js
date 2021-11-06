@@ -1,30 +1,20 @@
 const flowData = require('../data/flowData')
-
-const flowHandlers = {
-    'namePrompt': require('./namePrompt'),
-    'levelPrompt': require('./levelPrompt'),
-    'gearscorePrompt': require('./gearscorePrompt'),
-    'primaryWeaponPrompt': require('./primaryWeaponPrompt'),
-    'secondaryWeaponPrompt': require('./secondaryWeaponPrompt'),
-    'weightPrompt': require('./weightPrompt'),
-    'idle': require('./idlePrompt'),
-    'new': require('./newPrompt')
-}
+const logger = require('../lib/logger')
 
 module.exports.handle = (message) => {
     flowData.getFlowState(message.author.id, (err, state) => {
         if (err) {
-            message.author.send("Something went wrong: " + err);
+            message.author.send("Failed to get flowstate: " + err);
             return
         }
 
         if (!state) {
             state = 'new'
         }
-
-        if (!flowHandlers[state]) {
-            return;
+        try {
+            require(`./${state}`)(message)
+        } catch (ex) {
+            logger.error(`Could not find DM handler for state "${state}": ${ex}.`)
         }
-        flowHandlers[state](message)
     })
 }

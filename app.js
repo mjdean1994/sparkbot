@@ -5,7 +5,8 @@ const flowData = require('./data/flowData')
 const { MessageEmbed } = require('discord.js')
 const logger = require('./lib/logger')
 
-const client = require("./client")
+const client = require("./client");
+const buttonHandler = require('./buttonHandlers/buttonHandler');
 
 const commands = [
     { keyword: 'character', execute: require('./commands/character') }
@@ -38,14 +39,10 @@ client.on('messageCreate', (message) => {
 });
 
 client.on("interactionCreate", (interaction) => {
-    if (!interaction.isButton()) return;
-    if (interaction.customId == 'resetBtn') {
-        interaction.deferUpdate()
-        characterData.reset(interaction.user.id, (err) => {
-            interaction.user.send({ embeds: [new MessageEmbed().setTitle(`No worries about wanting a fresh start. Let's start from the top. What's your character's in-game name?`)] })
-            flowData.setFlowState(interaction.user.id, 'namePrompt')
-        })
+    if (interaction.isButton()) {
+        buttonHandler(interaction)
     }
+
 })
 
 client.login(token);
