@@ -1,6 +1,8 @@
 # SparkBot - Praise the Spark!
 SparkBot is a Discord chat bot created to make roster creation and management easier for war coordinators on New World. It was originally developed for the Covenant faction Discord server on the Orofena New World server. It's primary goal is to compile a list of players interested in wars and list their weapons of choice, weight class, level, and gearscore so that war coordinators can make informed decisions without having to personally know everyone on the roster.
 
+*In New World lore, "The Spark" is a pseudo-religious entity worshipped by the Covenant faction. While not well-defined, the Spark is acknowledged as an omni-present force within all humans that should be embraced as a means of reaching one's potential for goodness.*
+
 ## Technology
 SparkBot is written in NodeJS and heavily leverages the [discord.js](https://discord.js.org/#/) library for interactions with Discord. It also leverages the [Google Sheets API](https://developers.google.com/sheets/api) to maintain the spreadsheet roster. 
 
