@@ -211,12 +211,12 @@ module.exports = class Character {
     }
 
     set notes(notes) {
-        if (nameInnotesput.length > 256) {
+        if (notes.length > 256) {
             logger.warn(`Rejected input "notes" attribute value "${notes}" for user ${this.id}.`)
             throw `Yikes, talking as much as my ex-wife! Can you summarize all that for me? Try to keep it under 256 characters, please.`
         }
 
-        if (nameInput.startsWith("=")) {
+        if (notes.startsWith("=")) {
             logger.warn(`Rejected input "notes" attribute value "${notes}" for user ${this.id}.`)
             throw `Uhhh, are you trying to do some injection there or something? Maybe try something that doesn't start with an equal sign.`
         }

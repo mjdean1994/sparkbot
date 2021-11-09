@@ -9,7 +9,7 @@ module.exports = (message) => {
         return
     }
 
-    messenger.send(message.author, `I'll mark down that you're in ${message.character.weight} armor. Anything else you want people to know about you? You can just say "none", too.`, menuFactory.getManageCharacterMenu())
+    messenger.send(message.author, `I'll mark down that you're in ${message.character.weight} armor. Anything else you want people to know about you? You can just say "none", too.`)
 
     message.author.flow.state = 'noteNew'
 }
