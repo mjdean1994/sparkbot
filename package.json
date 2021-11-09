@@ -11,6 +11,8 @@
   "dependencies": {
     "dateformat": "^5.0.2",
     "discord.js": "^13.3.0",
-    "googleapis": "^39.2.0"
+    "googleapis": "^39.2.0",
+    "proper-lockfile": "^4.1.2",
+    "uuid": "^8.3.2"
   }
 }

@@ -1,12 +1,6 @@
-const { MessageEmbed } = require('discord.js')
-const flowData = require('../data/flowData')
+const messenger = require('../lib/messenger')
 
 module.exports = (interaction) => {
-    interaction.user.send(
-        {
-            embeds: [new MessageEmbed().setTitle(`Alright, moving up in the world. What level are you now?`)]
-        }
-    )
-    flowData.setFlowState(interaction.user.id, 'levelEdit')
-
+    messenger.send(interaction.user, `Alright, moving up in the world. What level are you now?`)
+    interaction.user.flow.state = 'levelEdit'
 }

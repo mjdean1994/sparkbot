@@ -1,12 +1,6 @@
-const { MessageEmbed } = require('discord.js')
-const flowData = require('../data/flowData')
+const messenger = require('../lib/messenger')
 
 module.exports = (interaction) => {
-    interaction.user.send(
-        {
-            embeds: [new MessageEmbed().setTitle(`I can definitely update your weapons. What's the first weapon you're using now?`)]
-        }
-    )
-    flowData.setFlowState(interaction.user.id, 'weapon1Edit')
-
+    messenger.send(interaction.user, `I can definitely update your weapons. What's the first weapon you're using now?`)
+    interaction.user.flow.state = 'weapon1Edit'
 }

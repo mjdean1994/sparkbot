@@ -5,7 +5,7 @@ module.exports = (interaction) => {
         require(`./${interaction.customId}Handler.js`)(interaction)
         interaction.message.delete()
     } catch (ex) {
-        logger.error(`Could not find button handler for button with ID "${interaction.customId}": ${ex}.`)
+        logger.error(`Failed to process button click with ID "${interaction.customId}": ${ex}.`)
     }
     interaction.deferUpdate();
 }

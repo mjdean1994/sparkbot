@@ -1,11 +1,6 @@
-const { MessageEmbed } = require('discord.js')
+const messenger = require('../lib/messenger')
 const menuFactory = require('../lib/menuFactory')
 
 module.exports = (interaction) => {
-    interaction.user.send(
-        {
-            embeds: [new MessageEmbed().setTitle(`Sure, we can change up your character. What would you like to update?`)],
-            components: menuFactory.getManageCharacterMenu()
-        }
-    )
+    messenger.send(interaction.user, `Sure, we can change up your character. What would you like to update?`, menuFactory.getManageCharacterMenu())
 }

@@ -1,12 +1,6 @@
-const { MessageEmbed } = require('discord.js')
-const flowData = require('../data/flowData')
+const messenger = require('../lib/messenger')
 
 module.exports = (interaction) => {
-    interaction.user.send(
-        {
-            embeds: [new MessageEmbed().setTitle(`New friends, new experiences, I hope! What's your company's name? You can also say "none" if you're not in one at the moment.`)]
-        }
-    )
-    flowData.setFlowState(interaction.user.id, 'companyEdit')
-
+    messenger.send(interaction.user, `New friends, new experiences, I hope! What's your company's name? You can also say "none" if you're not in one at the moment.`)
+    interaction.user.flow.state = 'companyEdit'
 }

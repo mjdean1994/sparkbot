@@ -63,7 +63,7 @@ const getNewToken = (oauth2Client, next = () => { }) => {
         access_type: 'offline',
         scope: ['https://www.googleapis.com/auth/spreadsheets']
     })
-    logger.info('Google Sheets requires re-authentication at this URL:', authUrl);
+    logger.info('Google Sheets requires re-authentication at this URL: ' + authUrl);
     const rl = readline.createInterface({
         input: process.stdin,
         output: process.stdout,
