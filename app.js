@@ -5,6 +5,8 @@ const logger = require('./lib/logger')
 const client = require("./client");
 const buttonHandler = require('./buttonHandlers/buttonHandler');
 const { token } = require('./config.json')
+const rb = require('./lib/rosterBuilder')
+let fs = require('fs')
 
 client.once('ready', () => {
     client.user.setActivity("New World", { type: "PLAYING" })
@@ -13,6 +15,7 @@ client.once('ready', () => {
 
 client.on('messageCreate', (message) => {
     if (message.author.bot) return;
+    if (message.channel.type != 'DM') return;
     characters.getOrAdd(message.author.id, (err, character) => {
         if (err) {
             return logger.error(`Failed to get character for id ${message.author.id}: ${err}`)
@@ -24,11 +27,9 @@ client.on('messageCreate', (message) => {
             }
             message.author.flow = flow
 
-            if (message.channel.type == 'DM') {
-                logger.info(`Handling direct message from user ${message.author.id}...`)
-                dmHandler.handle(message)
-                return
-            }
+            logger.info(`Handling direct message from user ${message.author.id}...`)
+            dmHandler.handle(message)
+            return
         })
     })
 });

@@ -3,8 +3,29 @@ const lockfile = require('proper-lockfile')
 const fs = require('fs')
 const sheets = require('./sheets')
 const logger = require('../lib/logger')
+const filterUtil = require('../lib/filter')
 
 const file = "./data/characterData.json"
+
+const list = (next) => {
+    lockfile.lock(file)
+        .then((release) => {
+            _get((err, obj) => {
+                release()
+                let result = []
+                let entries = Object.entries(obj)
+                for (let i = 0; i < entries.length; i++) {
+                    let entry = entries[i][1]
+                    entry.id = entries[i][0]
+                    result.push(entry)
+                }
+                next(err, result)
+            })
+        })
+        .catch((err) => {
+            return next(`Failed to acquire lock for file ${file}: ${err}`, null)
+        })
+}
 
 const getOrAdd = (id, next) => {
     let newCharacter = { name: id }
@@ -33,6 +54,15 @@ const getOrAdd = (id, next) => {
         .catch((err) => {
             return next(`Failed to acquire lock for file ${file}: ${err}`, null)
         })
+}
+
+const filter = (filterString, next) => {
+    list((err, obj) => {
+        if (err) {
+            return next(`Failed to get characters: ${err}`, null)
+        }
+        next(null, filterUtil.apply(obj, filterString))
+    })
 }
 
 const setAttribute = (id, attributeName, attributeValue, next = () => { }) => {
@@ -72,4 +102,6 @@ const _set = (obj, next) => {
 }
 
 module.exports.getOrAdd = getOrAdd
+module.exports.filter = filter
+module.exports.list = list
 module.exports.setAttribute = setAttribute

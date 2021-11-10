@@ -1,0 +1,112 @@
+[
+    {
+        "name": "Group 1",
+        "description": "Alpha Point Defense",
+        "member_criteria": [
+            "weight.equals.Heavy&level.equals.60&primaryWeapon.notequals.Life Staff&secondaryWeapon.notequals.LifeStaff",
+            "weight.equals.Heavy&level.equals.60&primaryWeapon.notequals.Life Staff&secondaryWeapon.notequals.LifeStaff",
+            "weight.equals.Heavy&level.equals.60&primaryWeapon.notequals.Life Staff&secondaryWeapon.notequals.LifeStaff",
+            "weight.equals.Heavy&level.equals.60&primaryWeapon.notequals.Life Staff&secondaryWeapon.notequals.LifeStaff",
+            "weight.equals.Heavy&level.equals.60&primaryWeapon,secondaryWeapon.equals.Life Staff"
+        ]
+    },
+    {
+        "name": "Group 2",
+        "description": "Bravo Point Defense",
+        "member_criteria": [
+            "name.equals.Magnus von test",
+            "weight.equals.Heavy&level.equals.60&primaryWeapon.notequals.Life Staff&secondaryWeapon.notequals.LifeStaff",
+            "weight.equals.Heavy&level.equals.60&primaryWeapon.notequals.Life Staff&secondaryWeapon.notequals.LifeStaff",
+            "weight.equals.Heavy&level.equals.60&primaryWeapon.notequals.Life Staff&secondaryWeapon.notequals.LifeStaff",
+            "weight.equals.Heavy&level.equals.60&primaryWeapon,secondaryWeapon.equals.Life Staff"
+        ]
+    },
+    {
+        "name": "Group 3",
+        "description": "Charlie Point Defense",
+        "member_criteria": [
+            "weight.equals.Heavy&level.equals.60&primaryWeapon.notequals.Life Staff&secondaryWeapon.notequals.LifeStaff",
+            "weight.equals.Heavy&level.equals.60&primaryWeapon.notequals.Life Staff&secondaryWeapon.notequals.LifeStaff",
+            "weight.equals.Heavy&level.equals.60&primaryWeapon.notequals.Life Staff&secondaryWeapon.notequals.LifeStaff",
+            "weight.equals.Heavy&level.equals.60&primaryWeapon.notequals.Life Staff&secondaryWeapon.notequals.LifeStaff",
+            "weight.equals.Heavy&level.equals.60&primaryWeapon,secondaryWeapon.equals.Life Staff"
+        ]
+    },
+    {
+        "name": "Group 4",
+        "description": "AB Offensive Float",
+        "member_criteria": [
+            "level.equals.60&primaryWeapon.notequals.Life Staff&secondaryWeapon.notequals.LifeStaff",
+            "level.equals.60&primaryWeapon.notequals.Life Staff&secondaryWeapon.notequals.LifeStaff",
+            "level.equals.60&primaryWeapon.notequals.Life Staff&secondaryWeapon.notequals.LifeStaff",
+            "level.equals.60&primaryWeapon.notequals.Life Staff&secondaryWeapon.notequals.LifeStaff",
+            "level.equals.60&primaryWeapon,secondaryWeapon.equals.Life Staff"
+        ]
+    },
+    {
+        "name": "Group 5",
+        "description": "AB Offensive Float",
+        "member_criteria": [
+            "level.equals.60&primaryWeapon.notequals.Life Staff&secondaryWeapon.notequals.LifeStaff",
+            "level.equals.60&primaryWeapon.notequals.Life Staff&secondaryWeapon.notequals.LifeStaff",
+            "level.equals.60&primaryWeapon.notequals.Life Staff&secondaryWeapon.notequals.LifeStaff",
+            "level.equals.60&primaryWeapon.notequals.Life Staff&secondaryWeapon.notequals.LifeStaff",
+            "level.equals.60&primaryWeapon,secondaryWeapon.equals.Life Staff"
+        ]
+    },
+    {
+        "name": "Group 6",
+        "description": "BC Offensive Float",
+        "member_criteria": [
+            "level.equals.60&primaryWeapon.notequals.Life Staff&secondaryWeapon.notequals.LifeStaff",
+            "level.equals.60&primaryWeapon.notequals.Life Staff&secondaryWeapon.notequals.LifeStaff",
+            "level.equals.60&primaryWeapon.notequals.Life Staff&secondaryWeapon.notequals.LifeStaff",
+            "level.equals.60&primaryWeapon.notequals.Life Staff&secondaryWeapon.notequals.LifeStaff",
+            "level.equals.60&primaryWeapon,secondaryWeapon.equals.Life Staff"
+        ]
+    },
+    {
+        "name": "Group 7",
+        "description": "BC Offensive Float",
+        "member_criteria": [
+            "level.equals.60&primaryWeapon.notequals.Life Staff&secondaryWeapon.notequals.LifeStaff",
+            "level.equals.60&primaryWeapon.notequals.Life Staff&secondaryWeapon.notequals.LifeStaff",
+            "level.equals.60&primaryWeapon.notequals.Life Staff&secondaryWeapon.notequals.LifeStaff",
+            "level.equals.60&primaryWeapon.notequals.Life Staff&secondaryWeapon.notequals.LifeStaff",
+            "level.equals.60&primaryWeapon,secondaryWeapon.equals.Life Staff"
+        ]
+    },
+    {
+        "name": "Group 8",
+        "description": "Artillery Support",
+        "member_criteria": [
+            "level.equals.60&primaryWeapon,secondaryWeapon.equals.Musket",
+            "level.equals.60&primaryWeapon,secondaryWeapon.equals.Musket",
+            "level.equals.60&primaryWeapon,secondaryWeapon.equals.Musket",
+            "level.equals.60&primaryWeapon,secondaryWeapon.equals.Musket",
+            "level.equals.60&primaryWeapon,secondaryWeapon.equals.Musket"
+        ]
+    },
+    {
+        "name": "Group 9",
+        "description": "Offensive Flank Force",
+        "member_criteria": [
+            "level.equals.60&gearscore.gt.550&primaryWeapon.notequals.Life Staff&secondaryWeapon.notequals.Life Staff",
+            "level.equals.60&gearscore.gt.550&primaryWeapon.notequals.Life Staff&secondaryWeapon.notequals.Life Staff",
+            "level.equals.60&gearscore.gt.550&primaryWeapon.notequals.Life Staff&secondaryWeapon.notequals.Life Staff",
+            "level.equals.60&gearscore.gt.550&primaryWeapon.notequals.Life Staff&secondaryWeapon.notequals.Life Staff",
+            "level.equals.60&gearscore.gt.550&primaryWeapon,secondaryWeapon.equals.Life Staff"
+        ]
+    },
+    {
+        "name": "Group 10",
+        "description": "Offensive Flank Force",
+        "member_criteria": [
+            "level.equals.60&gearscore.gt.550&primaryWeapon.notequals.Life Staff&secondaryWeapon.notequals.Life Staff",
+            "level.equals.60&gearscore.gt.550&primaryWeapon.notequals.Life Staff&secondaryWeapon.notequals.Life Staff",
+            "level.equals.60&gearscore.gt.550&primaryWeapon.notequals.Life Staff&secondaryWeapon.notequals.Life Staff",
+            "level.equals.60&gearscore.gt.550&primaryWeapon.notequals.Life Staff&secondaryWeapon.notequals.Life Staff",
+            "level.equals.60&gearscore.gt.550&primaryWeapon,secondaryWeapon.equals.Life Staff"
+        ]
+    }
+]
