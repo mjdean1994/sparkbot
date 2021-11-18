@@ -3,7 +3,7 @@ const messenger = require('../lib/messenger')
 module.exports = (message) => {
     let level = parseInt(message.content)
     try {
-        message.character.level = level
+        message.author.character.level = level
     } catch (ex) {
         messenger.send(message.author, ex)
         return

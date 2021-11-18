@@ -4,7 +4,7 @@ const menuFactory = require('../lib/menuFactory')
 module.exports = (message) => {
     let notes = message.content
     try {
-        message.character.notes = notes
+        message.author.character.notes = notes
     } catch (ex) {
         messenger.send(message.author, ex)
         return

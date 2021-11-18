@@ -4,6 +4,7 @@ const fs = require('fs')
 const logger = require('../lib/logger')
 
 const file = "./data/flowData.json"
+let cache = null
 
 const getOrAdd = (id, next) => {
     let newFlow = { state: "new", metadata: null }
@@ -17,6 +18,9 @@ const getOrAdd = (id, next) => {
                 }
                 if (obj[id]) {
                     release()
+                    if (typeof obj[id] === 'string') {
+                        obj[id] = { state: obj[id], metadata: "" }
+                    }
                     next(null, Flow.fromJson(id, obj[id]))
                     return
                 }
@@ -78,7 +82,31 @@ const setMetadata = (id, metadata, next = () => { }) => {
         })
 }
 
+const setStateAndMetadata = (id, state, metadata, next = () => { }) => {
+    lockfile.lock(file)
+        .then((release) => {
+            _get((err, obj) => {
+                if (err) {
+                    release()
+                    return next(`Failed to get flows: ${err}`, null);
+                }
+                if (typeof obj[id] == 'string') {
+                    let oldState = obj[id]
+                    obj[id] = { state: oldState, metadata: "" }
+                }
+                obj[id].state = state
+                obj[id].metadata = metadata
+                _set(obj, (err) => {
+                    release()
+                    logger.info(`Set flow metadata to "${metadata}" for user ${id}.`)
+                    next(err, Flow.fromJson(id, obj[id]))
+                })
+            })
+        })
+}
+
 const _get = (next) => {
+    if (cache) return next(null, cache)
     fs.readFile(file, 'utf-8', (err, data) => {
         if (err) {
             logger.error(`Failed to read ${file}: ${err}`)
@@ -91,6 +119,7 @@ const _get = (next) => {
 const _set = (obj, next) => {
     fs.writeFile(file, JSON.stringify(obj), (err) => {
         if (err) logger.error(`Failed to write to ${file}: ${err}`)
+        else cache = obj;
         next(err)
     })
 }
@@ -98,3 +127,4 @@ const _set = (obj, next) => {
 module.exports.getOrAdd = getOrAdd
 module.exports.setState = setState
 module.exports.setMetadata = setMetadata
+module.exports.setStateAndMetadata = setStateAndMetadata

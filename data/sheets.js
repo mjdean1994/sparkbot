@@ -76,7 +76,7 @@ const getNewToken = (oauth2Client, next = () => { }) => {
             }
             oauth2Client.setCredentials(token)
             fs.writeFile("tokenCache.json", JSON.stringify(token), () => { })
-            next(oauth2Client)
+            next(null, oauth2Client)
         })
     })
 }

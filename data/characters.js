@@ -6,6 +6,7 @@ const logger = require('../lib/logger')
 const filterUtil = require('../lib/filter')
 
 const file = "./data/characterData.json"
+let cache = null
 
 const list = (next) => {
     lockfile.lock(file)
@@ -84,6 +85,8 @@ const setAttribute = (id, attributeName, attributeValue, next = () => { }) => {
 }
 
 const _get = (next) => {
+    if (cache) return next(null, cache)
+
     fs.readFile(file, 'utf-8', (err, data) => {
         if (err) {
             logger.error(`Failed to read ${file}: ${err}`)
@@ -96,6 +99,7 @@ const _get = (next) => {
 const _set = (obj, next) => {
     fs.writeFile(file, JSON.stringify(obj), (err) => {
         if (err) logger.error(`Failed to write to ${file}: ${err}`)
+        else cache = obj
         next(err)
     })
     sheets.update(obj)

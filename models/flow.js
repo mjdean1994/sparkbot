@@ -1,10 +1,10 @@
 const flows = require('../data/flows')
 
 module.exports = class Flow {
-    constructor(id, state, metadata = null) {
+    constructor(id, state, metadata) {
         this.id = id
         this._state = state
-        this._metdata = metadata
+        this._metadata = metadata
     }
 
     get state() {
@@ -25,11 +25,13 @@ module.exports = class Flow {
         this._metadata = metadata
     }
 
+    setStateAndMetadata(state, metadata) {
+        this._state = state
+        this._metadata = metadata
+        flows.setStateAndMetadata(this.id, state, metadata)
+    }
+
     static fromJson(key, value) {
-        if (typeof value == 'string') {
-            return new Flow(key, value)
-        } else {
-            return new Flow(key, value.state, value.metadata)
-        }
+        return new Flow(key, value.state, value.metadata)
     }
 }

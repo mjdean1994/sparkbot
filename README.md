@@ -9,9 +9,9 @@ SparkBot is written in NodeJS and heavily leverages the [discord.js](https://dis
 ## Project Structure
 `app.js` is the entrypoint for the bot and contains event listeners for Discord activity as well as the method call that actually starts the bot. However, the client itself is abstracted away to `client.js` so that it can be referenced by other modules as needed for data lookup, such as in the case of our logger found at `lib/logger.js`. 
 
-All direct messages are routed through `flowHandlers/dmHandler.js`, which then delegates the processing to a flowHandler module found in `flowHandlers/` based on the messaging user's current flow. In this way, the bot is able to parse input from the user based on what it's waiting for the user to say. When direct messages are received, the application first sets `message.character` and `message.author.flow` to character and flow data, respectively, so that it can be more quickly accessed by downstream methods.
+All direct messages are routed through `flowHandlers/dmHandler.js`, which then delegates the processing to a flowHandler module found in `flowHandlers/` based on the messaging user's current flow. In this way, the bot is able to parse input from the user based on what it's waiting for the user to say. When direct messages are received, the application first sets `message.author.character` and `message.author.flow` to character and flow data, respectively, so that it can be more quickly accessed by downstream methods.
 
-Similarly, button clicks are routed through `buttonHandlers/buttonHandler.js`, which delegates processing to a buttonHandler module found in `buttonHandlers/` based on the ID of the button that was clicked. When interactions are received, the application first sets `interaction.character` and `interaction.user.flow` to character and flow data, respectively, so that it can be more quickly accessed by downstream methods.
+Similarly, button clicks are routed through `buttonHandlers/buttonHandler.js`, which delegates processing to a buttonHandler module found in `buttonHandlers/` based on the ID of the button that was clicked. When interactions are received, the application first sets `interaction.user.character` and `interaction.user.flow` to character and flow data, respectively, so that it can be more quickly accessed by downstream methods.
 
 For both flow handling and button click handling, the name of the module matches the flow state and button ID respectively, such that we can dynamically load the module as needed without having to keep a mapping of IDs or states and modules.
 
@@ -35,3 +35,12 @@ These instructions assume you have NodeJS v16.13.0 or higher and NPM v8.1.0 or h
 * Callbacks should be used instead of Promises, with the exception of `proper-lockfile` Promise handling.
 * New flow and button handlers should follow existing naming and structural patterns.
 * New domain objects should be represented through a DTO in `data/` and a class in `models/` that leverages that DTO.
+
+## Future Enhancements
+* Google authentication failure handling to regenerate token (Google Sheets API sucks)
+* Roster regeneration should only generate for empty slots
+* Roster notifications should not be resent to previous members on regeneration
+* RSVP system for roster--should automatically remove on "No"
+* Leader should be able to manually remove people from the waitlist
+* Make "View Roster" functionality look nicer (maybe using embeds)
+* Reject standby join for someone already on standby for overlapping war

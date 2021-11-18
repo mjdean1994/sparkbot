@@ -3,7 +3,7 @@ const messenger = require('../lib/messenger')
 module.exports = (message) => {
     let gearscore = parseInt(message.content)
     try {
-        message.character.gearscore = gearscore
+        message.author.character.gearscore = gearscore
     } catch (ex) {
         messenger.send(message.author, ex)
         return

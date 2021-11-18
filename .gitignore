@@ -3,3 +3,5 @@ tokenCache.json
 node_modules/
 data/characterData.json
 data/flowData.json
+data/warData.json
+data/grantData.json

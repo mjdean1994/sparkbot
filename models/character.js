@@ -146,6 +146,9 @@ module.exports = class Character {
         if (primaryWeapon.includes('life') || primaryWeapon.includes('heal')) {
             primaryActual = 'Life Staff'
         }
+        if (primaryWeapon.includes('void')) {
+            primaryActual = 'Void Gauntlet'
+        }
 
         if (!primaryActual) {
             logger.warn(`Rejected input "primaryWeapon" attribute value "${primaryWeapon}" for user ${this.id}.`)
@@ -190,6 +193,9 @@ module.exports = class Character {
         }
         if (secondaryWeapon.includes('life') || secondaryWeapon.includes('heal')) {
             secondaryActual = 'Life Staff'
+        }
+        if (secondaryWeapon.includes('void')) {
+            secondaryActual = 'Void Gauntlet'
         }
 
         if (!secondaryActual) {
