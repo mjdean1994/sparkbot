@@ -10,7 +10,6 @@ module.exports = (message) => {
         return
     }
 
-    messenger.send(message.author, `I'm a bit of a ${message.author.character.secondaryWeapon} player, myself. (Not really, they don't let my kind play the game) What else are we updating today?`, menuFactory.getManageCharacterMenu())
-
+    messenger.sendMenu(message.author, menuFactory.getCharacterMenu(message.author.character))
     message.author.flow.state = 'idle'
 }

@@ -9,6 +9,6 @@ module.exports = (interaction) => {
             return logger.error(err)
         }
         war.addToWaitlist(interaction.user.id)
-        messenger.sendEmbed(interaction.user, war.getEmbed(interaction.user), menuFactory.getWarMenu(war, interaction.user))
+        messenger.sendMenu(interaction.user, menuFactory.getWarSubMenu(war, interaction.user))
     })
 }

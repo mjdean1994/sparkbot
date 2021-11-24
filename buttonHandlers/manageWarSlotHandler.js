@@ -8,6 +8,6 @@ module.exports = (interaction) => {
         if (err) {
             return logger.error(err)
         }
-        messenger.sendMenu(interaction.user, menuFactory.getWarSubMenu(war, interaction.user))
+        messenger.sendMenu(interaction.user, menuFactory.getWarSlotMenu(war, interaction.customId.split(".")[2], interaction.customId.split(".")[3], interaction.user))
     })
 }

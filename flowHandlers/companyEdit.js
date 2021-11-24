@@ -10,11 +10,7 @@ module.exports = (message) => {
         return
     }
 
-    if (!message.author.character.company) {
-        messenger.send(message.author, `There's nothing wrong with flying solo! Do you need to change something else?`, menuFactory.getManageCharacterMenu())
-    } else {
-        messenger.send(message.author, `Ah, yes, ${company}. I'm so glad to have you all fighting for the Covenant! Do you need to change something else?`, menuFactory.getManageCharacterMenu())
-    }
+    messenger.sendMenu(message.author, menuFactory.getCharacterMenu(message.author.character))
 
     message.author.flow.state = 'idle'
 }

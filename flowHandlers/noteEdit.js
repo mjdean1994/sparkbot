@@ -10,7 +10,7 @@ module.exports = (message) => {
         return
     }
 
-    messenger.send(message.author, `Okay, I'll jot all that down for you. Want to update anything else while we're at it?`, menuFactory.getManageCharacterMenu())
+    messenger.sendMenu(message.author, menuFactory.getCharacterMenu(message.author.character))
 
     message.author.flow.state = 'idle'
 }

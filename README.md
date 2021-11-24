@@ -37,10 +37,9 @@ These instructions assume you have NodeJS v16.13.0 or higher and NPM v8.1.0 or h
 * New domain objects should be represented through a DTO in `data/` and a class in `models/` that leverages that DTO.
 
 ## Future Enhancements
-* Google authentication failure handling to regenerate token (Google Sheets API sucks)
-* Roster regeneration should only generate for empty slots
-* Roster notifications should not be resent to previous members on regeneration
-* RSVP system for roster--should automatically remove on "No"
-* Leader should be able to manually remove people from the waitlist
-* Make "View Roster" functionality look nicer (maybe using embeds)
-* Reject standby join for someone already on standby for overlapping war
+* Admin clearing of user data
+* RSVP system
+
+## User Suggestions
+* Karma system for war participation/misses
+* Qualification flags for siege, shotcalling, etc

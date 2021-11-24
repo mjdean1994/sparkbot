@@ -237,11 +237,19 @@ module.exports = class Character {
         let embed = new MessageEmbed()
             .setTitle(this._name).setColor("#DAA520")
         embed.addField("Company", this._company || "None", false)
-        embed.addField("Level", "" + this._level || "Unset", true)
-        embed.addField("Gearscore", "" + this._gearscore || "Unset", true)
-        embed.addField("Weapon 1", this._primaryWeapon || "Unset", false)
-        embed.addField("Weapon 2", this._secondaryWeapon, false)
-        embed.addField("Weight", this._weight || "Unset", false)
+        if (this._level && this._level > 0) {
+            embed.addField("Level", "" + this._level, true)
+        } else {
+            embed.addField("Level", "?", true)
+        }
+        if (this._gearscore && this._gearscore > 0) {
+            embed.addField("Gearscore", "" + this._gearscore, true)
+        } else {
+            embed.addField("Gearscore", "?", true)
+        }
+        embed.addField("Weapon 1", this._primaryWeapon || "?", false)
+        embed.addField("Weapon 2", this._secondaryWeapon || "?", false)
+        embed.addField("Weight", this._weight || "?", false)
         if (this._notes) {
             embed.addField("Notes", this._notes, false)
         }

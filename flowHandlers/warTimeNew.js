@@ -1,6 +1,7 @@
 const messenger = require('../lib/messenger')
 const logger = require('../lib/logger')
 const wars = require("../data/wars")
+const menuFactory = require('../lib/menuFactory')
 
 module.exports = (message) => {
     let time = message.content
@@ -13,8 +14,8 @@ module.exports = (message) => {
             return
         }
 
-        messenger.send(message.author, `Alright, I've got the war as taking place at ${new Date(time).toLocaleString("en-US", { timeZone: "America/New_York" })}. Next, can you upload the roster configuration for this war?`)
+        messenger.sendMenu(message.author, menuFactory.getWarSubMenu(war, message.author))
 
-        message.author.flow.state = 'warConfigNew'
+        message.author.flow.state = 'idle'
     })
 }

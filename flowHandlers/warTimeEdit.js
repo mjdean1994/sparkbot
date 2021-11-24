@@ -14,8 +14,7 @@ module.exports = (message) => {
             return
         }
 
-        messenger.send(message.author, `Okay, your war is now taking place at ${new Date(time).toLocaleString("en-US", { timeZone: "America/New_York" })}.`)
-        messenger.sendEmbed(message.author, war.getEmbed(message.author), menuFactory.getWarMenu(war, message.author))
+        messenger.sendMenu(message.author, menuFactory.getWarSubMenu(war, message.author))
 
         message.author.flow.state = 'idle'
     })

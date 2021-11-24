@@ -4,6 +4,8 @@ const fs = require("fs")
 const readline = require('readline');
 const logger = require('../lib/logger')
 
+const TOKEN_FILE = './tokenCache.json'
+
 const TRANSMISSION_COOLDOWN = 5
 let lastTransmission = 0
 let queuedTransmission = false
@@ -39,7 +41,13 @@ const sendUpdate = () => {
                 values: buildValueArray(queuedObj)
             }
         }, (err, res) => {
-            if (err) return logger.error('Failed to update roster: ' + err);
+            if (err) {
+                logger.error('Failed to update roster: ' + err);
+                fs.unlink(TOKEN_FILE, (err) => {
+                    if (err) logger.error("Failed to delete token cache: " + err);
+                })
+                return
+            }
         });
     })
 }
@@ -50,7 +58,7 @@ const authorize = (next = () => { }) => {
         clientSecret,
         redirectUri
     )
-    fs.readFile("tokenCache.json", (err, token) => {
+    fs.readFile(TOKEN_FILE, (err, token) => {
         if (err) return getNewToken(oauth2Client, next)
         oauth2Client.setCredentials(JSON.parse(token))
         next(null, oauth2Client)

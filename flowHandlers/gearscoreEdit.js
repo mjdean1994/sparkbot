@@ -10,6 +10,6 @@ module.exports = (message) => {
         return
     }
 
-    messenger.send(message.author, `I've updated your gearscore to ${gearscore}. What else can I update for you?`, menuFactory.getManageCharacterMenu())
+    messenger.sendMenu(message.author, menuFactory.getCharacterMenu(message.author.character))
     message.author.flow.state = 'idle'
 }

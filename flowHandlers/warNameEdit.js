@@ -14,8 +14,7 @@ module.exports = (message) => {
             return
         }
 
-        messenger.send(message.author, `I've updated the war name to ${name}.`)
-        messenger.sendEmbed(message.author, war.getEmbed(message.author), menuFactory.getWarMenu(war, message.author))
+        messenger.sendMenu(message.author, menuFactory.getWarSubMenu(war, message.author))
 
         message.author.flow.state = 'idle'
     })

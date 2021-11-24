@@ -8,6 +8,6 @@ module.exports = (interaction) => {
         if (err) {
             return logger.error(err)
         }
-        messenger.sendMenu(interaction.user, menuFactory.getWarSubMenu(war, interaction.user))
+        war.removeFromWaitlist(interaction.user.id)
     })
 }

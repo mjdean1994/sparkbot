@@ -16,10 +16,7 @@ const get = (warId, next) => {
                 if (err) {
                     return next(`Failed to get wars: ${err}`, null);
                 }
-                if (!obj[warId]) {
-                    throw "Aint shit there"
-                }
-                next(null, War.fromJson(warId, obj[warId]))
+                War.fromJson(warId, obj[warId]).generateDetailedLists(next)
             })
         })
         .catch((err) => {
@@ -69,7 +66,7 @@ const deleteWar = (warId, next) => {
 
 const create = (owner, next) => {
     let warId = uuidv4();
-    let newWar = { owner: owner }
+    let newWar = { owner: owner, waitlist: [], roster: [[null, null, null, null, null], [null, null, null, null, null], [null, null, null, null, null], [null, null, null, null, null], [null, null, null, null, null], [null, null, null, null, null], [null, null, null, null, null], [null, null, null, null, null], [null, null, null, null, null], [null, null, null, null, null]] }
     lockfile.lock(file)
         .then((release) => {
             _get((err, obj) => {
@@ -82,7 +79,7 @@ const create = (owner, next) => {
                     release()
                     if (err) return next(err, null);
                     logger.info(`Created new war with id ${warId} owned by ${owner}.`)
-                    next(null, War.fromJson(warId, newWar))
+                    War.fromJson(warId, newWar).generateDetailedLists(next)
                 })
             })
         })
@@ -103,8 +100,7 @@ const setAttribute = (warId, attributeName, attributeValue, next = () => { }) =>
                 _set(obj, (err) => {
                     release()
                     if (err) return next(err, null);
-                    logger.info(`Set attribute "${attributeName}" to "${attributeValue}" for war ${warId}.`)
-                    next(null, War.fromJson(warId, obj[warId]))
+                    War.fromJson(warId, obj[warId]).generateDetailedLists(next)
                 })
             })
         })
