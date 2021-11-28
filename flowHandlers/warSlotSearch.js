@@ -10,6 +10,13 @@ module.exports = (message) => {
     let metadataParts = message.author.flow.metadata.split(".")
     wars.get(metadataParts[0], (err, war) => {
         if (err) return logger.error(`Failed to get war: ${err}`)
+
+        if (query.toLowerCase() == "cancel") {
+            messenger.sendMenu(message.author, menuFactory.getWarSlotMenu(war, metadataParts[1], metadataParts[2], message.author))
+            message.author.flow.setStateAndMetadata('idle', metadataParts[0])
+            return
+        }
+
         let characterList = war.detailedWaitlist
         characterList = characterList.filter(x => !war.rosterIncludes(x.id))
         try {

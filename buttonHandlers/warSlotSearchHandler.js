@@ -6,7 +6,7 @@ const { MessageEmbed } = require('discord.js')
 
 module.exports = (interaction) => {
     let embed = new MessageEmbed()
-        .setTitle("Please specify a query string to use for your search.")
+        .setTitle("Please specify a query string to use for your search. You can also say \"cancel\" to go back.")
         .setDescription("[Learn more about SparkBot query strings here.](https://github.com/mjdean1994/sparkbot/wiki/Creating-a-SparkBot-Query-String)")
     messenger.sendEmbed(interaction.user, embed)
     interaction.user.flow.setStateAndMetadata('warSlotSearch', interaction.customId.split(".").slice(1).join("."))
