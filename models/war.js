@@ -97,7 +97,7 @@ module.exports = class War {
     }
 
     set time(time) {
-        let t = new Date(time)
+        let t = new Date(time * 1000)
         if (isNaN(t)) {
             logger.warn(`Rejected input "time" attribute value "${time}" for war ${this.id}.`)
             throw `Uhh, that doesn't look like a date and time to me. Try again.`

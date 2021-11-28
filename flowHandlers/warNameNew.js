@@ -1,6 +1,7 @@
 const messenger = require('../lib/messenger')
 const logger = require('../lib/logger')
 const wars = require("../data/wars")
+const { MessageEmbed } = require('discord.js')
 
 module.exports = (message) => {
     let name = message.content
@@ -13,7 +14,9 @@ module.exports = (message) => {
             return
         }
 
-        messenger.send(message.author, `It shall be a glorious fight! What time is this war taking place? Enter it in format \`MM/DD/YYYY hh:mm\` with a 24-hour time in EST.`)
+        let embed = new MessageEmbed().setTitle(`It shall be a glorious fight! What time is this war taking place? Enter the Unix timestamp for the date.`)
+            .setDescription("[Unix Timestamp Converter](https://www.epochconverter.com/)")
+        messenger.sendEmbed(message.author, embed)
 
         message.author.flow.state = 'warTimeNew'
     })
