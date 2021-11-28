@@ -22,7 +22,7 @@ module.exports = (message) => {
         try {
             characterList = filter.apply(characterList, query)
         } catch (ex) {
-            messenger.send(message.author, "I couldn't quite understand that. Are you sure that query string is right?")
+            messenger.send(message.author, "I couldn't quite understand that. Are you sure that query string is right? You can also say \"cancel\" to go back.")
             return
         }
 
