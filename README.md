@@ -38,8 +38,11 @@ These instructions assume you have NodeJS v16.13.0 or higher and NPM v8.1.0 or h
 
 ## Future Enhancements
 * Admin clearing of user data
-* RSVP system
 
 ## User Suggestions
 * Karma system for war participation/misses
-* Qualification flags for siege, shotcalling, etc
+* allow non-waitlisted users to be added to roster with confirmation prompt
+* Qualification flags for siege, shotcalling, invasions, etc
+
+## Known Issues
+* Google Sheets integration periodically breaks and a new token must be obtained.
