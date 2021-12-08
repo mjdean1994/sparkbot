@@ -62,6 +62,7 @@ const sendUpdate = () => {
                 logger.error('Failed to update roster: ' + err);
                 fs.unlink(TOKEN_FILE, (err) => {
                     hasTokenCache = false
+                    requestNewToken()
                     if (err) logger.error("Failed to delete token cache: " + err);
                 })
                 return
@@ -72,9 +73,14 @@ const sendUpdate = () => {
 
 const authorize = (next = () => { }) => {
     if (!hasTokenCache) {
-        requestNewToken()
+        next("Cannot update as there's no token to use.")
     }
     fs.readFile(TOKEN_FILE, (err, token) => {
+        if (err) {
+            hasTokenCache = false
+            requestNewToken()
+            next("Expected a token but got an error: " + err)
+        }
         getOauthClient().setCredentials(JSON.parse(token))
         next(null, getOauthClient())
     })
@@ -91,6 +97,7 @@ const requestNewToken = () => {
         .setDescription(`[Authentication Link](${authUrl})`)
     messenger.sendDirectMessageEmbed(ownerId, embed)
     flows.setState(ownerId, "requestToken")
+    pendingToken = true
 }
 
 const generateNewToken = (code, next = () => { }) => {
@@ -102,6 +109,7 @@ const generateNewToken = (code, next = () => { }) => {
         getOauthClient().setCredentials(token)
         fs.writeFile("tokenCache.json", JSON.stringify(token), () => {
             hasTokenCache = true
+            pendingToken = false
             next(null)
         })
     })
