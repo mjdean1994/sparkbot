@@ -76,7 +76,7 @@ const authorize = (next = () => { }) => {
         next("Cannot update as there's no token to use.")
     }
     fs.readFile(TOKEN_FILE, (err, token) => {
-        if (err) {
+        if (err || token == "undefined") {
             hasTokenCache = false
             requestNewToken()
             next("Expected a token but got an error: " + err)
