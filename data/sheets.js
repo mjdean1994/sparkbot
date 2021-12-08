@@ -85,7 +85,6 @@ const authorize = (next = () => { }) => {
             let tokenObject = JSON.parse(token)
             getOauthClient().setCredentials(tokenObject)
         } catch (ex) {
-            logger.error("Failed to parse token from cache file!")
             hasTokenCache = false
             requestNewToken()
             return next("Failed to parse token from cache file!")
