@@ -81,7 +81,15 @@ const authorize = (next = () => { }) => {
             requestNewToken()
             next("Expected a token but got an error: " + err)
         }
-        getOauthClient().setCredentials(JSON.parse(token))
+        try {
+            let tokenObject = JSON.parse(token)
+            getOauthClient().setCredentials(tokenObject)
+        } catch (ex) {
+            logger.error("Failed to parse token from cache file!")
+            hasTokenCache = false
+            requestNewToken()
+            return next("Failed to parse token from cache file!")
+        }
         next(null, getOauthClient())
     })
 }
