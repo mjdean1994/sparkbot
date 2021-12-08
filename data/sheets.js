@@ -76,10 +76,10 @@ const authorize = (next = () => { }) => {
         next("Cannot update as there's no token to use.")
     }
     fs.readFile(TOKEN_FILE, (err, token) => {
-        if (err || token == "undefined") {
+        if (err) {
             hasTokenCache = false
             requestNewToken()
-            next("Expected a token but got an error: " + err)
+            return next("Expected a token but got an error: " + err)
         }
         try {
             let tokenObject = JSON.parse(token)
