@@ -58,6 +58,9 @@ const setState = (id, state, next = () => { }) => {
                 })
             })
         })
+        .catch((err) => {
+            return next(`Failed to acquire lock for file ${file}: ${err}`, null)
+        })
 }
 
 const setMetadata = (id, metadata, next = () => { }) => {

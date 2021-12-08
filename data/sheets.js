@@ -103,9 +103,17 @@ const requestNewToken = () => {
 
     let embed = new MessageEmbed().setTitle("Please re-authenticate Google Sheets at the link provided and give me the code.")
         .setDescription(`[Authentication Link](${authUrl})`)
-    messenger.sendDirectMessageEmbed(ownerId, embed)
-    flows.setState(ownerId, "requestToken")
-    pendingToken = true
+
+    // There's a weird race condition here...
+    flows.setState(ownerId, "requestToken", (err) => {
+        if (err) {
+            logger.error("Failed to set flow state for owner to get new token.")
+            return
+        }
+        messenger.sendDirectMessageEmbed(ownerId, embed)
+        pendingToken = true
+    })
+
 }
 
 const generateNewToken = (code, next = () => { }) => {
