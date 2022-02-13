@@ -36,12 +36,17 @@ These instructions assume you have NodeJS v16.13.0 or higher and NPM v8.1.0 or h
 * `redirectUri` - The redirect URI for your OAuth 2.0 client. I think this is always `urn:ietf:wg:oauth:2.0:oob`.
 * `logChannelId` - The Discord channel ID where you'd like SparkBot logs to be posted. (SparkBot also logs to stdout)
 * `ownerId` - Your Discord member ID. This is how SparkBot will reach out to you if your Google API OAuth token goes bad.
+* `spreadsheetId` - The ID of the Google Sheets spreadsheet you want to record the roster on.
 
 To get the Discord bot token, you'll need create a new application in the [Discord Developer Portal](https://discord.com/developers/applications) and add a bot user. You'll be able to view and copy the token from the Bot page for your application.
 
 To get the GCP credentials, you'll need to create a project in Google Cloud Platform and create an OAuth 2.0 Client from the [API Credentials page](https://console.cloud.google.com/apis/credentials?project=pacific-arcadia-330621). Note that you may need to configure the OAuth consent screen for your project first. These credentials will allow SparkBot to generate a URL that you can then use to retrieve an OAuth token, which will be cached in a file alongside SparkBot until it goes bad. In my experience, the token goes bad every few weeks, and it's a pain in the ass. I've made it so that SparkBot will DM the person configured under `ownerId` with a new URL to retrieve a new token, which you can send back via DM to update the token without needing direct access to the server it's running on.
 
 There's a myriad of ways of getting channel and member IDs in Discord. You can follow the instructions found [here](https://www.remote.tools/remote-work/how-to-find-discord-id) if you don't know another way.
+
+Finally, to get the spreadsheet ID, simply navigate to whatever Google Sheets spreadsheet you want to use. You want to use the long unique ID in the URL for your spreadsheet. For example, if the URL is `docs.google.com/spreadsheets/d/1234/edit#gid=0`, your spreadsheet ID is `1234`.
+
+If you don't know what a JSON file might look like, you can reference `config.json.sample` in this repository for general structure.
 
 ## Contribution Guidelines
 * The `.gitignore` file should not be modified in any way.
