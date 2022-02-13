@@ -24,9 +24,24 @@ These instructions assume you have NodeJS v16.13.0 or higher and NPM v8.1.0 or h
 1. Clone the repository using `git clone https://github.com/mjdean1994/sparkbot.git`
 2. Navigate into the cloned directory using `cd sparkbot`
 3. Install dependencies using `npm install`
-4. Work with an existing contributor to create and populate `config.json`. You will need to get your own Google API credentials and Discord bot token.
+4. Create and populate `config.json` based on the instructions below.
 5. Run the application using `node app.js`
 6. During first-time execution, you will be prompted to log in to Google to authenticate the `sheets.js` module. Follow the instructions in the terminal to retrieve and enter a code.
+
+## Creating the Configuration File
+`config.json` is a JSON file that contains the following keys:
+* `token` - The Discord bot token for your application.
+* `clientId` - A Google Cloud Platform (GCP) OAuth 2.0 Client ID
+* `clientSecret` - A Google Cloud Platform (GCP) OAuth 2.0 Client Secret
+* `redirectUri` - The redirect URI for your OAuth 2.0 client. I think this is always `urn:ietf:wg:oauth:2.0:oob`.
+* `logChannelId` - The Discord channel ID where you'd like SparkBot logs to be posted. (SparkBot also logs to stdout)
+* `ownerId` - Your Discord member ID. This is how SparkBot will reach out to you if your Google API OAuth token goes bad.
+
+To get the Discord bot token, you'll need create a new application in the [Discord Developer Portal](https://discord.com/developers/applications) and add a bot user. You'll be able to view and copy the token from the Bot page for your application.
+
+To get the GCP credentials, you'll need to create a project in Google Cloud Platform and create an OAuth 2.0 Client from the [API Credentials page](https://console.cloud.google.com/apis/credentials?project=pacific-arcadia-330621). Note that you may need to configure the OAuth consent screen for your project first. These credentials will allow SparkBot to generate a URL that you can then use to retrieve an OAuth token, which will be cached in a file alongside SparkBot until it goes bad. In my experience, the token goes bad every few weeks, and it's a pain in the ass. I've made it so that SparkBot will DM the person configured under `ownerId` with a new URL to retrieve a new token, which you can send back via DM to update the token without needing direct access to the server it's running on.
+
+There's a myriad of ways of getting channel and member IDs in Discord. You can follow the instructions found [here](https://www.remote.tools/remote-work/how-to-find-discord-id) if you don't know another way.
 
 ## Contribution Guidelines
 * The `.gitignore` file should not be modified in any way.
