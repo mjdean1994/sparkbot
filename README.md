@@ -25,8 +25,9 @@ These instructions assume you have NodeJS v16.13.0 or higher and NPM v8.1.0 or h
 2. Navigate into the cloned directory using `cd sparkbot`
 3. Install dependencies using `npm install`
 4. Create and populate `config.json` based on the instructions below.
-5. Run the application using `node app.js`
-6. During first-time execution, you will be prompted to log in to Google to authenticate the `sheets.js` module. Follow the instructions in the terminal to retrieve and enter a code.
+5. Create empty data files in the data directory. The files should each contain an empty pair of curly braces (`{}`). These are the files you should create: `characterData.json`, `flowData.json`, `grantData.json`, and `warData.json`.
+6. Run the application using `node app.js`
+7. During first-time execution, you will be prompted to log in to Google to authenticate the `sheets.js` module. Follow the instructions in the terminal to retrieve and enter a code.
 
 ## Creating the Configuration File
 `config.json` is a JSON file that contains the following keys:
