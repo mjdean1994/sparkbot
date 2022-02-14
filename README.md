@@ -20,14 +20,15 @@ The `data/` directory contains the JSON files in which flow and character data i
 The `lib/` directory contains helper functions that allow us to abstract away some common calls. The `logger.js` module within this directory allows us to log to both a specified Discord channel and stdout so that we can more easily view application logs when SparkBot is running in a deployed environmnet. The `messenger.js` module simply abstracts away the MessageEmbed creation complexity for sending messages back to the user.
 
 ## Running the Application
-These instructions assume you have NodeJS v16.13.0 or higher and NPM v8.1.0 or higher installed on your machine already.
+These instructions assume you have NodeJS v16.13.0 or higher and NPM v8.1.0 or higher installed on your machine already. Also, these instructions do not cover the process to create a Discord application and bot user and add them to your server. There's a lot of tutorials out there such as [this one](https://discordjs.guide/preparations/setting-up-a-bot-application.html) that can help with that.
 1. Clone the repository using `git clone https://github.com/mjdean1994/sparkbot.git`
 2. Navigate into the cloned directory using `cd sparkbot`
 3. Install dependencies using `npm install`
 4. Create and populate `config.json` based on the instructions below.
 5. Create empty data files in the data directory. The files should each contain an empty pair of curly braces (`{}`). These are the files you should create: `characterData.json`, `flowData.json`, `grantData.json`, and `warData.json`.
-6. Run the application using `node app.js`
-7. During first-time execution, you will be prompted to log in to Google to authenticate the `sheets.js` module. Follow the instructions in the terminal to retrieve and enter a code.
+6. Create a file called `tokenCache.json` in the root of the project and insert an empty pair of curly braces into it.
+7. Run the application using `node app.js`
+8. During first-time execution, you will be prompted to log in to Google to authenticate the `sheets.js` module. Follow the instructions in the terminal to retrieve and enter a code.
 
 ## Creating the Configuration File
 `config.json` is a JSON file that contains the following keys:
@@ -38,16 +39,20 @@ These instructions assume you have NodeJS v16.13.0 or higher and NPM v8.1.0 or h
 * `logChannelId` - The Discord channel ID where you'd like SparkBot logs to be posted. (SparkBot also logs to stdout)
 * `ownerId` - Your Discord member ID. This is how SparkBot will reach out to you if your Google API OAuth token goes bad.
 * `spreadsheetId` - The ID of the Google Sheets spreadsheet you want to record the roster on.
+* `spreadsheetTabName` - The name of the tab in your Google Sheets spreadsheet where you want to record the roster. The default name for this in Google Sheets is "Sheet1".
 
 To get the Discord bot token, you'll need create a new application in the [Discord Developer Portal](https://discord.com/developers/applications) and add a bot user. You'll be able to view and copy the token from the Bot page for your application.
 
-To get the GCP credentials, you'll need to create a project in Google Cloud Platform and create an OAuth 2.0 Client from the [API Credentials page](https://console.cloud.google.com/apis/credentials?project=pacific-arcadia-330621). Note that you may need to configure the OAuth consent screen for your project first. These credentials will allow SparkBot to generate a URL that you can then use to retrieve an OAuth token, which will be cached in a file alongside SparkBot until it goes bad. In my experience, the token goes bad every few weeks, and it's a pain in the ass. I've made it so that SparkBot will DM the person configured under `ownerId` with a new URL to retrieve a new token, which you can send back via DM to update the token without needing direct access to the server it's running on.
+To get the GCP credentials, you'll need to create a project in Google Cloud Platform and create an OAuth 2.0 Client from the [API Credentials page](https://console.cloud.google.com/apis/credentials?project=pacific-arcadia-330621). Note that you may need to configure the OAuth consent screen for your project first. These credentials will allow SparkBot to generate a URL that you can then use to retrieve an OAuth token, which will be cached in a file alongside SparkBot until it goes bad. In my experience, the token goes bad every few weeks, and it's a pain in the ass. I've made it so that SparkBot will DM the person configured under `ownerId` with a new URL to retrieve a new token, which you can send back via DM to update the token without needing direct access to the server it's running on. The lifespan of this token will also depend on the "phase" of your GCP client. Making it a production client will likely help the token live longer.
 
 There's a myriad of ways of getting channel and member IDs in Discord. You can follow the instructions found [here](https://www.remote.tools/remote-work/how-to-find-discord-id) if you don't know another way.
 
 Finally, to get the spreadsheet ID, simply navigate to whatever Google Sheets spreadsheet you want to use. You want to use the long unique ID in the URL for your spreadsheet. For example, if the URL is `docs.google.com/spreadsheets/d/1234/edit#gid=0`, your spreadsheet ID is `1234`.
 
 If you don't know what a JSON file might look like, you can reference `config.json.sample` in this repository for general structure.
+
+## Manually Adding User Roles
+User roles are used for things like war management and are handled through the "grant" data object. `grantData.json` contains a key for each user that has been detected by SparkBot and a value in the form of a JSON object containing a boolean for each role the bot supports. If you want to manually grant someone a role, simply change the desired boolean to `true` for their user ID. You can also do this to set the first admin.
 
 ## Contribution Guidelines
 * The `.gitignore` file should not be modified in any way.
@@ -59,6 +64,8 @@ If you don't know what a JSON file might look like, you can reference `config.js
 
 ## Future Enhancements
 * Admin clearing of user data
+* Store data in memory and periodically sync to file system instead of on-demand syncing to avoid race condition. Could have a dirtiness flag to avoid redundant writes to file system when nothing has been changed.
+* Detect when data files are missing and create them instead of requiring the user to create them upon initialization of the local repository.
 
 ## User Suggestions
 * Karma system for war participation/misses

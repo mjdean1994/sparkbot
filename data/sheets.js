@@ -1,5 +1,5 @@
 const { google } = require('googleapis')
-const { clientId, clientSecret, redirectUri, spreadsheetId, ownerId } = require('../config.json')
+const { clientId, clientSecret, redirectUri, spreadsheetId, spreadsheetTabName, ownerId } = require('../config.json')
 const fs = require("fs")
 const readline = require('readline');
 const logger = require('../lib/logger');
@@ -52,7 +52,7 @@ const sendUpdate = () => {
         let sheets = google.sheets({ version: "v4", auth: auth })
         sheets.spreadsheets.values.update({
             spreadsheetId: spreadsheetId,
-            range: 'Roster!A:I',
+            range: `${spreadsheetTabName}!A:I`,
             valueInputOption: 'USER_ENTERED',
             resource: {
                 values: buildValueArray(queuedObj)
