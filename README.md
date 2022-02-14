@@ -52,7 +52,11 @@ Finally, to get the spreadsheet ID, simply navigate to whatever Google Sheets sp
 If you don't know what a JSON file might look like, you can reference `config.json.sample` in this repository for general structure.
 
 ## Manually Adding User Roles
-User roles are used for things like war management and are handled through the "grant" data object. `grantData.json` contains a key for each user that has been detected by SparkBot and a value in the form of a JSON object containing a boolean for each role the bot supports. If you want to manually grant someone a role, simply change the desired boolean to `true` for their user ID. You can also do this to set the first admin.
+User roles are used for things like war management and are handled through the "grant" data object. `grantData.json` contains a key for each user that has been detected by SparkBot and a value in the form of a JSON object containing a boolean for each role the bot supports. If you want to manually grant someone a role, simply change the desired boolean to `true` for their user ID. You can also do this to set the first admin. If you don't see any roles in the JSON object for a user, you can also manually add `"admin": true` to the object.
+
+At this time, the following roles are supposed:
+* `admin` - Grants the ability to give roles to others.
+* `warCoordinator` - Grants the ability to create and manage wars.
 
 ## Contribution Guidelines
 * The `.gitignore` file should not be modified in any way.
